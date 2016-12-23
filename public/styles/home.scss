@@ -1,0 +1,41 @@
+.home {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('../../images/literati1.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 93vh;
+  width: 100vw;
+  margin: 0px;
+  padding: 0px;
+
+}
+
+#login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  background-color: white;
+  height: 15em;
+  border-radius: 20px;
+}
+
+
+#login-btn {
+  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3em;
+  width: 3em;
+  margin: 5px;
+}
+
+.log {
+  font-family: 'Karla', sans-serif;
+  font-size: 2em;
+}
