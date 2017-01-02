@@ -2,12 +2,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url('../../images/dark.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  background-image: url('../../images/geo.png');
+  background-size: auto;
+  background-repeat: repeat;
   height: 93vh;
-  width: 100vw;
-  margin: 0px;
   padding: 0px;
+}
+
+#book {
+  background-color: white;
+  height: 80vh;
 }

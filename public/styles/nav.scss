@@ -1,5 +1,12 @@
 .navbar {
   margin: 0px;
   padding: 0px;
-  font-family: 'Karla', sans-serif;
+  font-family: 'Megrim', sans-serif;
+  border-radius: 0;
+  a {
+    font-size: 1.1rem;
+  }
+  .navbar-brand {
+    font-size: 1.5rem;
+  }
 }
