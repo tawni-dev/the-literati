@@ -14,6 +14,6 @@ angular.module('theLiterati').controller('membersCtrl', function ($scope, user, 
 
   $scope.logout = () => {
     logout();
-  }
+  };
 
 });

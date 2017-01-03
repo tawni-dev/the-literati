@@ -7,7 +7,7 @@ angular.module('theLiterati').service('sessionService', () => {
 
     getSession(data) {
       if(!this.checkLocalStorage()) {
-        return false
+        return false;
       }
 
       const session = localStorage.getItem('session');

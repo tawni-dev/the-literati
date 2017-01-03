@@ -4,6 +4,6 @@ angular.module('theLiterati').controller('userAuthCtrl', (authService, $state) =
     $state.go('members.books');
   }, (err) => {
     $state.go('home');
-  })
+  });
 
 });

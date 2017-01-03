@@ -38,59 +38,6 @@ theLiterati.config(function ($stateProvider, $urlRouterProvider) {
 });
 'use strict';
 
-angular.module('theLiterati').controller('adminCtrl', function (isAdmin) {
-  console.log(isAdmin);
-
-  console.log("On the admin controller");
-});
-'use strict';
-
-angular.module('theLiterati').controller('booksCtrl', function () {
-
-  console.log("On the book service");
-});
-'use strict';
-
-angular.module('theLiterati').controller('mainCtrl', function ($scope, bookService) {
-
-  console.log("On the book service");
-
-  mainService.getBooks().then(function (response) {
-    $scope.myBook = response;
-  });
-});
-'use strict';
-
-angular.module('theLiterati').controller('membersCtrl', function ($scope, user, $state, authService) {
-
-  function logout() {
-    authService.deauthenticate().then(function () {
-      $state.go('home');
-    });
-  }
-
-  if (!user || user.is_active === false) {
-    logout();
-  }
-
-  $scope.currentUser = user;
-
-  $scope.logout = function () {
-    logout();
-  };
-});
-'use strict';
-
-angular.module('theLiterati').controller('userAuthCtrl', function (authService, $state) {
-
-  authService.authenticate().then(function (data) {
-    $state.go('members.books');
-  }, function (err) {
-    $state.go('home');
-  });
-});
-'use strict';
-
 angular.module('theLiterati').service('authService', function ($http, sessionService, $q) {
 
   return {
@@ -143,13 +90,23 @@ angular.module('theLiterati').service('authService', function ($http, sessionSer
 });
 'use strict';
 
-angular.module('theLiterati').service('bookService', function ($http) {
+angular.module('theLiterati').service('bookService', function ($http, $q) {
 
-  this.getBooks = function () {
+  this.searchBook = function () {
     return $http({
       method: GET,
-      url: ''
-    }).then(function gotBook(response) {
+      url: 'https://www.googleapis.com/books/v1/volumes?q=' + searchTerm + '&key=AIzaSyCOvCtvf_p2guH3C3TQshW8xfs69DUIKoI'
+    }).then(function (response) {
+      console.log(response.data);
+      return response.data;
+    });
+  };
+
+  this.getBook = function (bookId) {
+    return $http({
+      method: 'GET',
+      url: 'https://www.googleapis.com/books/v1/volumes/' + bookId
+    }).then(function (response) {
       return response.data;
     });
   };
@@ -184,4 +141,57 @@ angular.module('theLiterati').service('sessionService', function () {
       }
     }
   };
+});
+'use strict';
+
+angular.module('theLiterati').controller('adminCtrl', function (isAdmin) {
+  console.log(isAdmin);
+
+  console.log("On the admin controller");
+});
+'use strict';
+
+angular.module('theLiterati').controller('booksCtrl', function () {
+
+  console.log("On the book service");
+});
+'use strict';
+
+angular.module('theLiterati').controller('mainCtrl', function ($scope, bookService) {
+
+  console.log("On the book service");
+
+  mainService.getBooks().then(function (response) {
+    $scope.myBook = response;
+  });
+});
+'use strict';
+
+angular.module('theLiterati').controller('membersCtrl', function ($scope, user, $state, authService) {
+
+  function logout() {
+    authService.deauthenticate().then(function () {
+      $state.go('home');
+    });
+  }
+
+  if (!user || user.is_active === false) {
+    logout();
+  }
+
+  $scope.currentUser = user;
+
+  $scope.logout = function () {
+    logout();
+  };
+});
+'use strict';
+
+angular.module('theLiterati').controller('userAuthCtrl', function (authService, $state) {
+
+  authService.authenticate().then(function (data) {
+    $state.go('members.books');
+  }, function (err) {
+    $state.go('home');
+  });
 });
