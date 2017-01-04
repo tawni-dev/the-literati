@@ -1,9 +1,9 @@
 angular.module('theLiterati').controller('adminCtrl', (isAdmin, $scope, bookService) => {
 
-  function resetTabs() {
+  $scope.resetTabs = function () {
     $scope.tabBotM = true;
     $scope.tabUsers = false;
-  }
+  };
 
   $scope.resetTabs();
   $scope.searchTerm = '';
@@ -32,6 +32,9 @@ angular.module('theLiterati').controller('adminCtrl', (isAdmin, $scope, bookServ
 
   $scope.setBotM = (book) => {
     console.log(book);
+    bookService.setBotM(book.id).then(function (response) {
+
+    });
   };
 
 });

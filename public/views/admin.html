@@ -22,7 +22,7 @@
         <tbody>
           <tr ng-repeat="book in results">
             <td><img ng-src="{{book.volumeInfo.imageLinks.smallThumbnail}}" /></td>
-            <td>{{book.volumeInfo.title}}</td>
+            <td><h2 class="book-title">{{book.volumeInfo.title}}</h2><br> {{book.volumeInfo.description}}</td>
             <td><a href ng-click="setBotM(book)"><i class="glyphicon glyphicon-ok"></i></a></td>
           </tr>
           <tr ng-if="results.length === 0 && loading !== true">

@@ -1,5 +1,6 @@
 .home {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background-image: url('../../images/literati1.jpg');
@@ -11,6 +12,19 @@
   margin: 0px;
   padding: 0px;
 
+}
+
+.literati {
+  color: white;
+  font-size: 6em;
+  padding: 15px;
+  font-family: 'Megrim';
+}
+
+@media only screen and (max-width: 580px) {
+    .literati {
+        font-size: 3.5em;
+    }
 }
 
 #login {

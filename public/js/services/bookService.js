@@ -22,4 +22,25 @@ angular.module('theLiterati').service('bookService', function ($http, $q) {
       });
     };
 
+  this.setBotM = function(BotM) {
+    return $http({
+      method: 'POST',
+      url: '/setBotm/' + BotM
+
+    }).then(function (response) {
+      return response.data;
+    });
+  };
+
+  
+  this.getBotM = function () {
+    return $http({
+      method: 'GET',
+      url: '/BotM'
+    }).then(function (response) {
+      console.log(response);
+       return response.data.gbid;
+    });
+  };
+
 });

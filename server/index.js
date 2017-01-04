@@ -32,6 +32,7 @@ require('./passport')(app);
 // ROUTES //
 /////////////
 require('./routes/auth')(app);
+require('./routes/admin')(app);
 
 app.listen(port, (err) => {
   if (err) {

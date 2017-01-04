@@ -41,5 +41,5 @@ theLiterati.config(function($stateProvider, $urlRouterProvider) {
           return authService.isAdmin();
         }
       }
-    })
+    });
 });

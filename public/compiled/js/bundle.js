@@ -38,90 +38,6 @@ theLiterati.config(function ($stateProvider, $urlRouterProvider) {
 });
 'use strict';
 
-angular.module('theLiterati').controller('adminCtrl', function (isAdmin, $scope, bookService) {
-
-  function resetTabs() {
-    $scope.tabBotM = true;
-    $scope.tabUsers = false;
-  }
-
-  $scope.resetTabs();
-  $scope.searchTerm = '';
-  $scope.loading = false;
-  $scope.results = [];
-
-  $scope.switchTab = function (type) {
-    $scope.resetTabs();
-    $scope['tab' + type] = true;
-  };
-
-  $scope.searchBook = function (evt) {
-    var keyCode = evt.keyCode;
-    var searchTerm = $scope.searchTerm;
-
-    if (keyCode === 13 && searchTerm !== '') {
-      $scope.loading = true;
-      $scope.results = [];
-
-      bookService.searchBook(searchTerm).then(function (data) {
-        $scope.loading = false;
-        $scope.results = data.items;
-      });
-    }
-  };
-
-  $scope.setBotM = function (book) {
-    console.log(book);
-  };
-});
-'use strict';
-
-angular.module('theLiterati').controller('booksCtrl', function () {
-
-  console.log("On the book service");
-});
-'use strict';
-
-angular.module('theLiterati').controller('mainCtrl', function ($scope, bookService) {
-
-  console.log("On the book service");
-
-  mainService.getBooks().then(function (response) {
-    $scope.myBook = response;
-  });
-});
-'use strict';
-
-angular.module('theLiterati').controller('membersCtrl', function ($scope, user, $state, authService) {
-
-  function logout() {
-    authService.deauthenticate().then(function () {
-      $state.go('home');
-    });
-  }
-
-  if (!user || user.is_active === false) {
-    logout();
-  }
-
-  $scope.currentUser = user;
-
-  $scope.logout = function () {
-    logout();
-  };
-});
-'use strict';
-
-angular.module('theLiterati').controller('userAuthCtrl', function (authService, $state) {
-
-  authService.authenticate().then(function (data) {
-    $state.go('members.books');
-  }, function (err) {
-    $state.go('home');
-  });
-});
-'use strict';
-
 angular.module('theLiterati').service('authService', function ($http, sessionService, $q) {
 
   return {
@@ -197,6 +113,26 @@ angular.module('theLiterati').service('bookService', function ($http, $q) {
       return response.data;
     });
   };
+
+  this.setBotM = function (BotM) {
+    return $http({
+      method: 'POST',
+      url: '/setBotm/' + BotM
+
+    }).then(function (response) {
+      return response.data;
+    });
+  };
+
+  this.getBotM = function () {
+    return $http({
+      method: 'GET',
+      url: '/BotM'
+    }).then(function (response) {
+      console.log(response);
+      return response.data.gbid;
+    });
+  };
 });
 'use strict';
 
@@ -228,4 +164,98 @@ angular.module('theLiterati').service('sessionService', function () {
       }
     }
   };
+});
+'use strict';
+
+angular.module('theLiterati').controller('adminCtrl', function (isAdmin, $scope, bookService) {
+
+  $scope.resetTabs = function () {
+    $scope.tabBotM = true;
+    $scope.tabUsers = false;
+  };
+
+  $scope.resetTabs();
+  $scope.searchTerm = '';
+  $scope.loading = false;
+  $scope.results = [];
+
+  $scope.switchTab = function (type) {
+    $scope.resetTabs();
+    $scope['tab' + type] = true;
+  };
+
+  $scope.searchBook = function (evt) {
+    var keyCode = evt.keyCode;
+    var searchTerm = $scope.searchTerm;
+
+    if (keyCode === 13 && searchTerm !== '') {
+      $scope.loading = true;
+      $scope.results = [];
+
+      bookService.searchBook(searchTerm).then(function (data) {
+        $scope.loading = false;
+        $scope.results = data.items;
+      });
+    }
+  };
+
+  $scope.setBotM = function (book) {
+    console.log(book);
+    bookService.setBotM(book.id).then(function (response) {});
+  };
+});
+'use strict';
+
+angular.module('theLiterati').controller('booksCtrl', function ($scope, bookService) {
+
+  console.log("On the book service");
+  function getBotM() {
+    bookService.getBotM().then(function (response) {
+      bookService.getBook(response).then(function (response) {
+        $scope.book = response.volumeInfo;
+        console.log(response);
+      });
+    });
+  }
+  getBotM();
+});
+'use strict';
+
+angular.module('theLiterati').controller('mainCtrl', function ($scope, bookService) {
+
+  console.log("On the book service");
+
+  mainService.getBooks().then(function (response) {
+    $scope.myBook = response;
+  });
+});
+'use strict';
+
+angular.module('theLiterati').controller('membersCtrl', function ($scope, user, $state, authService) {
+
+  function logout() {
+    authService.deauthenticate().then(function () {
+      $state.go('home');
+    });
+  }
+
+  if (!user || user.is_active === false) {
+    logout();
+  }
+
+  $scope.currentUser = user;
+
+  $scope.logout = function () {
+    logout();
+  };
+});
+'use strict';
+
+angular.module('theLiterati').controller('userAuthCtrl', function (authService, $state) {
+
+  authService.authenticate().then(function (data) {
+    $state.go('members.books');
+  }, function (err) {
+    $state.go('home');
+  });
 });
