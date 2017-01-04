@@ -1,7 +1,4 @@
 .admin {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background-image: url("../../images/geo.png");
   background-size: auto;
   background-repeat: repeat;
@@ -9,9 +6,26 @@
   padding: 0px; }
 
 #admin {
-  display: flex;
   background-color: white;
-  height: 80vh; }
+  height: calc(100vh - 51px);
+  width: 80vw;
+  margin: 0 auto;
+  overflow-y: auto; }
+  #admin .container-fluid {
+    padding-top: 1em;
+    width: 100%; }
+  #admin .nav.nav-tabs {
+    display: block;
+    width: 100%; }
+
+.tab-content {
+  display: none; }
+  .tab-content.show {
+    display: block; }
+
+.loading-state {
+  font-size: 2em;
+  text-align: center; }
 
 .dash-unit {
   margin-bottom: 30px;
