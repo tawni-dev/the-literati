@@ -21,7 +21,8 @@ module.exports = (app) => {
   passport.use(new FacebookStrategy({
     clientID: config.FACEBOOK_APP_ID,
     clientSecret: config.FACEBOOK_APP_SECRET,
-    callbackURL: 'http://localhost:3000/auth/facebook/callback'
+    callbackURL: 'http://localhost:3000/auth/facebook/callback',
+    profileFields: ['id', 'displayName', 'email', 'picture']
   }, (accessToken, refreshToken, profile, done) => {
     const db = app.get('db');
 
@@ -37,7 +38,9 @@ module.exports = (app) => {
       db.users.insert({
         facebook_id: profile.id,
         display_name: profile.displayName,
-        token: accessToken
+        token: accessToken,
+        email: profile._json.email,
+        photo_url: profile._json.picture.data.url
       }, (err, res) => {
         if(err) {
           return done(err);

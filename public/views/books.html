@@ -1,18 +1,27 @@
-<div class="books">
-
-  <div id="book">
-
-        <div id="book-container">
-          <p class="title">{{book.title}}</p>
-          <img src="{{book.imageLinks.small}}" class="img-responsive" alt="Responsive image">
-        </div>
-      <div id="book-container">
+<div class="content-container">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
         <p class="title">{{book.title}}</p>
-        <img src="{{book.imageLinks.small}}" class="img-responsive" alt="Responsive image">
+        <img ng-src="{{book.imageLinks.small}}" class="img-responsive" alt="Responsive image">
+      </div>
+      <div class="col-xs-12 col-md-6">
+        <div class="chat-box">
+          <div class="form-group">
+            <label for="textMessage">Text Message</label>
+            <textarea name="textMessage" id="textMessage" class="form-control" ng-model="messageVal" ng-keyup="chatKeyUp($event)"></textarea>
+          </div>
+          <ul class="list-group">
+            <li ng-repeat="message in messages" class="list-group-item">
+              <div class="new-message">
+                <img ng-src="{{message.photoUrl}}" />
+                <span class="message-from">{{message.name}}</span>
+                <p class="message-body">{{message.message}}</p>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
-
-
   </div>
 </div>

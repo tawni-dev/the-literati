@@ -1,17 +1,14 @@
 angular.module('theLiterati').controller('adminCtrl', (isAdmin, $scope, bookService) => {
 
-  $scope.resetTabs = function () {
-    $scope.tabBotM = true;
-    $scope.tabUsers = false;
-  };
-
-  $scope.resetTabs();
+  $scope.tabBotM = true;
+  $scope.tabUsers = false;
   $scope.searchTerm = '';
   $scope.loading = false;
   $scope.results = [];
 
   $scope.switchTab = (type) => {
-    $scope.resetTabs();
+    $scope.tabBotM = false;
+    $scope.tabUsers = false;
     $scope[`tab${type}`] = true;
   };
 

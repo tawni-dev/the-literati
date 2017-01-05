@@ -32,14 +32,13 @@ angular.module('theLiterati').service('bookService', function ($http, $q) {
     });
   };
 
-  
+
   this.getBotM = function () {
     return $http({
       method: 'GET',
       url: '/BotM'
     }).then(function (response) {
-      console.log(response);
-       return response.data.gbid;
+      return response.data.gbid;
     });
   };
 

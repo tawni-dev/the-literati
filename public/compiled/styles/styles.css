@@ -26,7 +26,8 @@
     width: 100%; }
 
 .tab-content {
-  display: none; }
+  display: none;
+  margin-top: 1em; }
   .tab-content.show {
     display: block; }
 
@@ -135,8 +136,23 @@ body {
   padding: 0px; }
 
 .main-content {
+  display: flex;
   height: 100vh;
-  padding-top: 51px; }
+  padding-top: 51px;
+  justify-content: center;
+  background-image: url("../../images/geo.png");
+  background-size: auto;
+  background-repeat: repeat; }
+
+.content-container {
+  background-color: #fff;
+  border-radius: 10px;
+  box-sizing: border-box;
+  width: 80%;
+  height: 80%;
+  padding: 1em 0;
+  align-self: center;
+  overflow-y: auto; }
 
 .navbar {
   margin: 0px;

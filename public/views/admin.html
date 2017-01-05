@@ -1,43 +1,41 @@
-<div class="admin">
-  <div id="admin">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-xs-12">
-          <ul class="nav nav-tabs nav-justified">
-            <li role="presentation" ng-class="{active: tabBotM}"><a href ng-click="switchTab('BotM')">Book of the Month</a></li>
-            <li role="presentation" ng-class="{active: tabUsers}"><a href ng-click="switchTab('Users')">Users</a></li>
-          </ul>
-        </div>
+<div class="content-container">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12">
+        <ul class="nav nav-tabs nav-justified">
+          <li role="presentation" ng-class="{active: tabBotM}"><a href ng-click="switchTab('BotM')">Book of the Month</a></li>
+          <li role="presentation" ng-class="{active: tabUsers}"><a href ng-click="switchTab('Users')">Users</a></li>
+        </ul>
       </div>
     </div>
+  </div>
 
-    <div class="container-fluid tab-content" ng-class="{show: tabBotM}">
-      <div class="form-group">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Book title to search." ng-keyup="searchBook($event)" ng-model="searchTerm">
-          <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
-        </div>
+  <div class="container-fluid tab-content" ng-class="{show: tabBotM}">
+    <div class="form-group">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Book title to search." ng-keyup="searchBook($event)" ng-model="searchTerm">
+        <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
       </div>
-      <table class="table table-bordered">
-        <tbody>
-          <tr ng-repeat="book in results">
-            <td><img ng-src="{{book.volumeInfo.imageLinks.smallThumbnail}}" /></td>
-            <td><h2 class="book-title">{{book.volumeInfo.title}}</h2><br> {{book.volumeInfo.description}}</td>
-            <td><a href ng-click="setBotM(book)"><i class="glyphicon glyphicon-ok"></i></a></td>
-          </tr>
-          <tr ng-if="results.length === 0 && loading !== true">
-            <td colspan="3">No results for that search query.</td>
-          </tr>
-        </tbody>
-      </table>
     </div>
+    <table class="table table-bordered">
+      <tbody>
+        <tr ng-repeat="book in results">
+          <td><img ng-src="{{book.volumeInfo.imageLinks.smallThumbnail}}" /></td>
+          <td><h2 class="book-title">{{book.volumeInfo.title}}</h2><br> {{book.volumeInfo.description}}</td>
+          <td><a href ng-click="setBotM(book)"><i class="glyphicon glyphicon-ok"></i></a></td>
+        </tr>
+        <tr ng-if="results.length === 0 && loading !== true">
+          <td colspan="3">No results for that search query.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-    <div class="container-fluid tab-content" ng-class="{show: tabUsers}">
-      I'm the tab for users
-    </div>
+  <div class="container-fluid tab-content" ng-class="{show: tabUsers}">
+    I'm the tab for users
+  </div>
 
-    <div class="container-fluid tab-content loading-state" ng-class="{show: loading}">
-      <i class="fa fa-spinner fa-spin"></i>
-    </div>
+  <div class="container-fluid tab-content loading-state" ng-class="{show: loading}">
+    <i class="fa fa-spinner fa-spin"></i>
   </div>
 </div>
