@@ -13,13 +13,13 @@ body {
   height: 100vh;
   padding-top: 51px;
   justify-content: center;
-  background-image: url('../../images/geo.png');
-  background-size: auto;
-  background-repeat: repeat;
+  background-image: url('../../images/literati4.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .content-container {
-  background-color: #fff;
+  background-color: rgba(31, 30, 30, 0.76);
   border-radius: 10px;
   box-sizing: border-box;
   width: 80%;
@@ -27,4 +27,6 @@ body {
   padding: 1em 0;
   align-self: center;
   overflow-y: auto;
+  color: white;
+  font-family: 'Raleway';
 }

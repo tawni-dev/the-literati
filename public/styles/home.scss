@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url('../../images/literati1.jpg');
+  background-image: url('../../images/literati2.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -17,8 +17,12 @@
 .literati {
   color: white;
   font-size: 6em;
-  padding: 15px;
+  padding: 5px;
   font-family: 'Megrim';
+  border-bottom-color: white;
+  border-bottom-style: solid;
+  border-bottom-width: thin;
+  margin-bottom: 20px;
 }
 
 @media only screen and (max-width: 580px) {
@@ -33,9 +37,10 @@
   justify-content: center;
   flex-direction: column;
   text-align: center;
-  background-color: white;
-  height: 14em;
-  border-radius: 20px;
+  color: white;
+  background-color: rgba(31, 30, 30, 0.76);
+  height: 7em;
+  // border-radius: 20px;
 }
 
 
@@ -44,13 +49,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 3em;
-  width: 3em;
+  height: 2em;
+  width: 2em;
   margin: 5px;
 }
 
 .log {
-  font-family: 'Open Sans Condensed', sans-serif;
-  font-size: 2.5em;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  font-size: 1.5em;
   padding: 8px;
 }

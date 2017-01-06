@@ -22,7 +22,7 @@ angular.module('theLiterati').controller('booksCtrl', ($scope, bookService) => {
         $scope.messageVal = '';
       }
     }
-  }
+  };
 
   function getBotM () {
     bookService.getBotM().then(function (response) {
@@ -33,4 +33,7 @@ angular.module('theLiterati').controller('booksCtrl', ($scope, bookService) => {
   }
 
   getBotM();
+
+  $scope.poll = {choices: [{text: 'Hello', votes: []}, {text: 'Goodbye', votes: []}]};
+
 });

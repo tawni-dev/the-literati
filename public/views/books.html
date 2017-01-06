@@ -1,14 +1,24 @@
 <div class="content-container">
   <div class="container-fluid">
     <div class="row">
+
+      <!-- //Book of the Month Half// -->
+
       <div class="col-xs-12 col-md-6">
+        <p class="botm">Book of the Month</p>
         <p class="title">{{book.title}}</p>
         <img ng-src="{{book.imageLinks.small}}" class="img-responsive" alt="Responsive image">
       </div>
+
+      <!-- //Discussion Half// -->
+
       <div class="col-xs-12 col-md-6">
+
+        <!-- //Chat Box// -->
+
         <div class="chat-box">
           <div class="form-group">
-            <label for="textMessage">Text Message</label>
+            <label for="textMessage">New Message</label>
             <textarea name="textMessage" id="textMessage" class="form-control" ng-model="messageVal" ng-keyup="chatKeyUp($event)"></textarea>
           </div>
           <ul class="list-group">
@@ -21,7 +31,42 @@
             </li>
           </ul>
         </div>
+
+        <!-- //Poll Box// -->
+
+        <div class="poll-box">
+          <p class="question">What do you want to read next month?</p>
+
+          <div ng-hide="poll.userVoted">
+            <form role="form" ng-submit="vote()">
+              <div ng-repeat="choice in poll.choices" class="radio">
+                <label for="cb"><input type="radio" name="choice" ng-model="poll.userVote" value="{{choice._id}}" id="cb">{{choice.text}}</label>
+              </div>
+              <button class="btn btn-primary" type="submit">Vote</button>
+            </form>
+          </div>
+
+          <div ng-show="poll.userVoted">
+            <table class="result-table">
+              <tbody>
+                <tr ng-repeat="choice in poll.choices">
+                  <td>{{choice.text}}</td>
+                  <td>
+                    <table style="width: {{choice.votes.length/poll.totalVotes*100}}%;">
+                      <tr>
+                        <td>{{choice.votes.length}}</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p><em>{{poll.totalVotes}} votes counted so far. <span ng-show="poll.userChoice">You voted for <strong>{{poll.userChoice.text}}</strong>.</span></em></p>
+          </div>
+
+        </div>
+
+
       </div>
     </div>
   </div>
-</div>

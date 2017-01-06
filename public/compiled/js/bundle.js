@@ -109,6 +109,8 @@ angular.module('theLiterati').controller('booksCtrl', function ($scope, bookServ
   }
 
   getBotM();
+
+  $scope.poll = { choices: [{ text: 'Hello', votes: [] }, { text: 'Goodbye', votes: [] }] };
 });
 'use strict';
 
@@ -140,6 +142,9 @@ angular.module('theLiterati').controller('membersCtrl', function ($scope, user, 
     logout();
   };
 });
+'use strict';
+
+angular.module('theLiterati').controller('pollCtrl', function ($scope) {});
 'use strict';
 
 angular.module('theLiterati').controller('userAuthCtrl', function (authService, $state) {

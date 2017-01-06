@@ -1,41 +1,11 @@
-.books {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-image: url('../../images/geo.png');
-  background-size: auto;
-  background-repeat: repeat;
-  min-height: calc(100vh - 51px);
-  padding: 0px;
-}
-
-#book {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  background-color: white;
-  padding: 10px;
-  width: 80vw;
-  min-height: 80vh;
-  margin: auto;
-}
-
-
-#book-container {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  flex-wrap: wrap;
-  min-height: 80vh;
-}
-
-
 .title {
+  display: block;
   text-align: center;
-  float: left;
-  font-family: 'Open Sans';
-  font-size: 1.5em;
+  font-family: 'Raleway';
+  font-weight: 300;
+  font-size: 1em;
   padding: 10px;
+  color: white;
 }
 @media only screen and (max-width: 580px) {
     .title {
@@ -44,8 +14,58 @@
 }
 
 .img-responsive {
-  float: left;
-  display: inline-block;
-  max-width: 300px;
-  max-width: 70vw;
+  display: block;
+  margin: auto;
+}
+
+.chat-box {
+  font-family: 'Raleway';
+  font-weight: 300;
+  color: white;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+#textMessage {
+  margin-top: 10px;
+}
+
+textarea.form-control {
+  height: 2.5em;
+}
+
+.list-group-item {
+  color: black;
+}
+
+.botm {
+  display: block;
+  text-align: center;
+  font-family: 'Megrim';
+  font-size: 2.5em;
+  color: white;
+  padding: 5px;
+  border-bottom-color: white;
+  border-bottom-style: solid;
+  border-bottom-width: thin;
+}
+
+.form-group {
+  margin-top: 20px;
+}
+
+.poll-box {
+  color: white;
+}
+
+.question {
+  text-align: center;
+  font-family: 'Raleway';
+  font-weight: 300;
+  font-size: 1em;
+  padding: 10px;
+  border-bottom-color: white;
+  border-bottom-style: solid;
+  border-bottom-width: thin;
+
 }
