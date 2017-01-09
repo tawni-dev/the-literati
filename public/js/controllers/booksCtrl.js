@@ -3,12 +3,26 @@ angular.module('theLiterati').controller('booksCtrl', ($scope, bookService) => {
 
   $scope.messages = [];
   $scope.messageVal = '';
+  $scope.disabledMessages = true;
+
+  socket.on('initialized', () => {
+    socket.emit('getMessageHistory');
+  });
+
+  socket.on('messageHistory', (messages) => {
+    $scope.disabledMessages = false;
+    messages.forEach((item) => {
+      $scope.messages.push(item);
+      $scope.$apply();
+    });
+  });
 
   socket.on('newMessage', (message, user) => {
-    $scope.messages.push({
-      message: message,
-      name: user.display_name,
-      photoUrl: user.photo_url
+    $scope.messages.unshift({
+      message: message.message,
+      createdAt: message.createdAt,
+      displayName: user.displayName,
+      photoUrl: user.photoUrl
     });
     $scope.$apply();
   });

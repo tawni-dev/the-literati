@@ -19,14 +19,15 @@
         <div class="chat-box">
           <div class="form-group">
             <label for="textMessage">New Message</label>
-            <textarea name="textMessage" id="textMessage" class="form-control" ng-model="messageVal" ng-keyup="chatKeyUp($event)"></textarea>
+            <textarea name="textMessage" ng-disabled="disabledMessages" id="textMessage" class="form-control" ng-model="messageVal" ng-keyup="chatKeyUp($event)"></textarea>
           </div>
           <ul class="list-group">
             <li ng-repeat="message in messages" class="list-group-item">
               <div class="new-message">
-                <img ng-src="{{message.photoUrl}}" />
-                <span class="message-from">{{message.name}}</span>
+                <img ng-src="{{message.photoUrl}}" class="message-photo" />
+                <span class="message-from">{{message.displayName}}</span>
                 <p class="message-body">{{message.message}}</p>
+                <span class="message-date">{{message.createdAt | date : 'short' : 'America/Denver'}}</span>
               </div>
             </li>
           </ul>

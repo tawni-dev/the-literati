@@ -34,8 +34,42 @@ textarea.form-control {
   height: 2.5em;
 }
 
+.image-responsive {
+  max-height: 400px;
+}
+
+.list-group {
+  text-align: left;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
 .list-group-item {
-  color: black;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: white;
+}
+
+.new-message {
+  padding-left: 70px;
+}
+
+.message-body {
+  margin: 0.8em 0;
+}
+
+.message-from {
+  font-weight: bold;
+}
+
+.message-date {
+  font-size: 0.8em;
+}
+
+.message-photo {
+  position: absolute;
+  top: 10px;
+  left: 15px;
 }
 
 .botm {
