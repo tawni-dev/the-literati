@@ -7,7 +7,7 @@
       <div class="col-xs-12 col-md-6">
         <p class="botm">Book of the Month</p>
         <p class="title">{{book.title}}</p>
-        <img ng-src="{{book.imageLinks.small}}" class="img-responsive" alt="Responsive image">
+        <img ng-src="{{book.imageLinks.small || book.imageLinks.smallThumbnail}}" class="img-responsive" alt="Responsive image">
       </div>
 
       <!-- //Discussion Half// -->
@@ -18,7 +18,7 @@
 
         <div class="chat-box">
           <div class="form-group">
-            <label for="textMessage">New Message</label>
+            <label for="textMessage">Write a new message...</label>
             <textarea name="textMessage" ng-disabled="disabledMessages" id="textMessage" class="form-control" ng-model="messageVal" ng-keyup="chatKeyUp($event)"></textarea>
           </div>
           <ul class="list-group">
@@ -35,7 +35,7 @@
 
         <!-- //Poll Box// -->
 
-        <div class="poll-box">
+        <!-- <div class="poll-box">
           <p class="question">What do you want to read next month?</p>
 
           <div ng-hide="poll.userVoted">
@@ -63,7 +63,7 @@
               </tbody>
             </table>
             <p><em>{{poll.totalVotes}} votes counted so far. <span ng-show="poll.userChoice">You voted for <strong>{{poll.userChoice.text}}</strong>.</span></em></p>
-          </div>
+          </div> -->
 
         </div>
 

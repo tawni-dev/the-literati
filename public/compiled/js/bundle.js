@@ -38,6 +38,134 @@ theLiterati.config(function ($stateProvider, $urlRouterProvider) {
 });
 'use strict';
 
+angular.module('theLiterati').service('authService', function ($http, sessionService, $q) {
+
+  return {
+    authenticate: function authenticate() {
+      return $q(function (resolve, reject) {
+        var session = sessionService.getSession();
+
+        if (session) {
+          return resolve(session);
+        }
+
+        return $http({
+          method: 'GET',
+          url: 'http://localhost:3000/session'
+        }).then(function (resp) {
+          return resolve(sessionService.createSession(resp.data));
+        }, function (err) {
+          return reject(err);
+        });
+      });
+    },
+    deauthenticate: function deauthenticate() {
+      return $q(function (resolve, reject) {
+        return $http({
+          method: 'GET',
+          url: 'http://localhost:3000/logout'
+        }).then(function (resp) {
+          return resolve(sessionService.deleteSession());
+        }, function (err) {
+          return reject(err);
+        });
+      });
+    },
+    isAdmin: function isAdmin() {
+      return $q(function (resolve, reject) {
+        var session = sessionService.getSession();
+
+        if (!session) {
+          return reject("No session to check.");
+        }
+
+        if (session.is_admin) {
+          return resolve(true);
+        }
+
+        return reject(false);
+      });
+    }
+  };
+});
+'use strict';
+
+angular.module('theLiterati').service('bookService', function ($http, $q) {
+
+  this.searchBook = function (searchTerm) {
+    return $q(function (resolve, reject) {
+      return $http({
+        method: 'GET',
+        url: 'https://www.googleapis.com/books/v1/volumes?q=' + searchTerm + '&key=AIzaSyCOvCtvf_p2guH3C3TQshW8xfs69DUIKoI'
+      }).then(function (response) {
+        return resolve(response.data);
+      }, function (err) {
+        return reject(err);
+      });
+    });
+  };
+
+  this.getBook = function (bookId) {
+    return $http({
+      method: 'GET',
+      url: 'https://www.googleapis.com/books/v1/volumes/' + bookId
+    }).then(function (response) {
+      return response.data;
+    });
+  };
+
+  this.setBotM = function (BotM) {
+    return $http({
+      method: 'POST',
+      url: '/setBotm/' + BotM
+
+    }).then(function (response) {
+      return response.data;
+    });
+  };
+
+  this.getBotM = function () {
+    return $http({
+      method: 'GET',
+      url: '/BotM'
+    }).then(function (response) {
+      return response.data.gbid;
+    });
+  };
+});
+'use strict';
+
+angular.module('theLiterati').service('sessionService', function () {
+
+  return {
+    checkLocalStorage: function checkLocalStorage() {
+      return typeof Storage !== 'undefined';
+    },
+    getSession: function getSession(data) {
+      if (!this.checkLocalStorage()) {
+        return false;
+      }
+
+      var session = localStorage.getItem('session');
+      return session !== 'undefined' && session !== undefined ? JSON.parse(session) : false;
+    },
+    createSession: function createSession(data) {
+      if (!this.checkLocalStorage) {
+        return false;
+      }
+
+      localStorage.setItem('session', JSON.stringify(data));
+      return data;
+    },
+    deleteSession: function deleteSession() {
+      if (this.checkLocalStorage) {
+        localStorage.removeItem('session');
+      }
+    }
+  };
+});
+'use strict';
+
 angular.module('theLiterati').controller('adminCtrl', function (isAdmin, $scope, bookService) {
 
   $scope.tabBotM = true;
@@ -168,132 +296,4 @@ angular.module('theLiterati').controller('userAuthCtrl', function (authService, 
   }, function (err) {
     $state.go('home');
   });
-});
-'use strict';
-
-angular.module('theLiterati').service('authService', function ($http, sessionService, $q) {
-
-  return {
-    authenticate: function authenticate() {
-      return $q(function (resolve, reject) {
-        var session = sessionService.getSession();
-
-        if (session) {
-          return resolve(session);
-        }
-
-        return $http({
-          method: 'GET',
-          url: 'http://localhost:3000/session'
-        }).then(function (resp) {
-          return resolve(sessionService.createSession(resp.data));
-        }, function (err) {
-          return reject(err);
-        });
-      });
-    },
-    deauthenticate: function deauthenticate() {
-      return $q(function (resolve, reject) {
-        return $http({
-          method: 'GET',
-          url: 'http://localhost:3000/logout'
-        }).then(function (resp) {
-          return resolve(sessionService.deleteSession());
-        }, function (err) {
-          return reject(err);
-        });
-      });
-    },
-    isAdmin: function isAdmin() {
-      return $q(function (resolve, reject) {
-        var session = sessionService.getSession();
-
-        if (!session) {
-          return reject("No session to check.");
-        }
-
-        if (session.is_admin) {
-          return resolve(true);
-        }
-
-        return reject(false);
-      });
-    }
-  };
-});
-'use strict';
-
-angular.module('theLiterati').service('bookService', function ($http, $q) {
-
-  this.searchBook = function (searchTerm) {
-    return $q(function (resolve, reject) {
-      return $http({
-        method: 'GET',
-        url: 'https://www.googleapis.com/books/v1/volumes?q=' + searchTerm + '&key=AIzaSyCOvCtvf_p2guH3C3TQshW8xfs69DUIKoI'
-      }).then(function (response) {
-        return resolve(response.data);
-      }, function (err) {
-        return reject(err);
-      });
-    });
-  };
-
-  this.getBook = function (bookId) {
-    return $http({
-      method: 'GET',
-      url: 'https://www.googleapis.com/books/v1/volumes/' + bookId
-    }).then(function (response) {
-      return response.data;
-    });
-  };
-
-  this.setBotM = function (BotM) {
-    return $http({
-      method: 'POST',
-      url: '/setBotm/' + BotM
-
-    }).then(function (response) {
-      return response.data;
-    });
-  };
-
-  this.getBotM = function () {
-    return $http({
-      method: 'GET',
-      url: '/BotM'
-    }).then(function (response) {
-      return response.data.gbid;
-    });
-  };
-});
-'use strict';
-
-angular.module('theLiterati').service('sessionService', function () {
-
-  return {
-    checkLocalStorage: function checkLocalStorage() {
-      return typeof Storage !== 'undefined';
-    },
-    getSession: function getSession(data) {
-      if (!this.checkLocalStorage()) {
-        return false;
-      }
-
-      var session = localStorage.getItem('session');
-      return session !== 'undefined' && session !== undefined ? JSON.parse(session) : false;
-    },
-    createSession: function createSession(data) {
-      if (!this.checkLocalStorage) {
-        return false;
-      }
-
-      localStorage.setItem('session', JSON.stringify(data));
-      return data;
-    },
-    deleteSession: function deleteSession() {
-      if (this.checkLocalStorage) {
-        localStorage.removeItem('session');
-      }
-    }
-  };
 });

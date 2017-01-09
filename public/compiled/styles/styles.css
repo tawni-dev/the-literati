@@ -35,7 +35,13 @@ a {
 
 .img-responsive {
   display: block;
-  margin: auto; }
+  margin: auto;
+  min-height: 420px;
+  max-height: 420px; }
+
+@media only screen and (max-width: 580px) {
+  .img-responsive {
+    min-height: 350px; } }
 
 .chat-box {
   font-family: 'Raleway';
@@ -50,12 +56,9 @@ a {
 textarea.form-control {
   height: 2.5em; }
 
-.image-responsive {
-  max-height: 400px; }
-
 .list-group {
   text-align: left;
-  max-height: 300px;
+  max-height: 400px;
   overflow-y: auto; }
 
 .list-group-item {
